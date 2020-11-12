@@ -1,11 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os import getenv
-
+from os import getenv
 app = Flask(__name__)
 
-app.config['SQLAlCHEMY_DATABASE_URI'] = getenv('DB_URI')
-app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@35.246.12.217/board'
+app.config['SECRET_KEY'] = 'SECRET_KEY'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

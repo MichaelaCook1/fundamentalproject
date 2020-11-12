@@ -68,7 +68,7 @@ class PairForm(FlaskForm):
         for pair in pairs:
             if pair.task == task.data:
                 raise ValidationError("You've already added this Pairing")
-class OrderCheese(FlaskForm):
+class OrderPairing(FlaskForm):
     order_with = SelectField('Order With',
             choices=[
                 ("id","Recent"),

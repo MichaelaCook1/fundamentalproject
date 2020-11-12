@@ -1,14 +1,14 @@
 from flask import render_template,redirect,url_for 
-from applciation import db, app
-from application.models import Cheeses, Wines, Pairing
-from application.forms import CheeseForm, WineForm, PairForm, OrderCheese, OrderWine, OrderPairing
+from application import db, app
+from application.models import Cheeses, Wines,  Pairing
+from application.forms import CheeseForm, WineForm,  PairForm, OrderCheese, OrderWine, OrderPairing
 
 @app.route('/', methods=['POST', 'GET' ])
 def index():
     cheese = Cheeses.query.all()
     wine = Wines.query.all()
     pair = Pairing.query.all()
-    return render_template('index.html', title='Wine and Cheese Board', cheese=cheese, wine=wine, pair=pair)
+    return render_template('index.html', title='Wine and Cheese Board', cheese=cheese, wines=wine,pair=pair)
 
 ####################################################################################################################################################################
 
@@ -43,7 +43,7 @@ def addwine():
 def addpair():
     form = PairForm()
     if form.validate_on_submit():
-       pair = Pairing(
+        pair = Pairing(
                 task = form.task.data
                 )
         db.session.add(pair)
@@ -56,8 +56,8 @@ def addpair():
 @app.route('/updatecheese/<int:id>', methods=['GET','POST'])
 def updatecheese(id):
     form = CheeseForm()
-    cheese = Cheeses.query.get.(id)
-      if form.validate_on_submit():
+    cheese = Cheeses.query.get(id)
+    if form.validate_on_submit():
         cheese.task = form.task.data
         db.session.commit()
         return redirect(url_for('index'))
@@ -70,8 +70,8 @@ def updatecheese(id):
 @app.route('/updatewine/<int:id>', methods=['GET','POST'])
 def updatewine(id):
     form = WineForm()
-    wine = Wines.query.get.(id)
-      if form.validate_on_submit():
+    wine = Wines.query.get(id)
+    if form.validate_on_submit():
         wine.task = form.task.data
         db.session.commit()
         return redirect(url_for('index'))
@@ -84,8 +84,8 @@ def updatewine(id):
 @app.route('/updatepair/<int:id>', methods=['GET','POST'])
 def updatepair(id):
     form = PairForm()
-    pairs = Pairing.query.get.(id)
-      if form.validate_on_submit():
+    pairs = Pairing.query.get(id)
+    if form.validate_on_submit():
         pair.task = form.task.data
         db.session.commit()
         return redirect(url_for('index'))
@@ -97,7 +97,7 @@ def updatepair(id):
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    currentcheese = Cheeses.query.get(id)
+    currentcheese = Cheese.query.get(id)
     currentwine = Wines.query.get(id)
     currentpair = Pairing.query.get(id)
     db.session.delete(currentwine)
