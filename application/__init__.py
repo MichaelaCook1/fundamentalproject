@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import secrets
+import os import getenv
 
-secret_key = secrets.token_hex(16)
 app = Flask(__name__)
 
-app.config['SQLAlCHEMY_DATABASE_URI'] = "mysql+pymysql://root:root@35.242.191.104"
-app.config['SECRET_KEY'] = "its a secret"
+app.config['SQLAlCHEMY_DATABASE_URI'] = getenv('DB_URI')
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 from application import routes
