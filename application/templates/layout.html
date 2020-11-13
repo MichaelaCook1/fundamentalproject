@@ -7,9 +7,9 @@
 <body>
     <h1>{{ title }}</h1>
     <a href="{{ url_for('index') }}">Home</a>
-    <a href="{{ url_for('add') }}">Add a Cheese</a>
-    <a href="{{ url_for('add') }}">Add a Wine</a>
-    <a href="{{ url_for('add') }}">Add a Pairing</a>
+    <a href="{{ url_for('addcheese') }}">Add a Cheese</a>
+    <a href="{{ url_for('addwine') }}">Add a Wine</a>
+    <a href="{{ url_for('addpair') }}">Add a Pairing</a>
     {% block body_content %}
     {% endblock body_content %}
 </body>

@@ -1,15 +1,16 @@
-{% extends 'layout.html  %}
-{% block body_content%}
+{% extends 'layout.html %}
+{% block body_content %}
 
-    <div>
-        <form action="" method='POST'>
+<div style="background-image: url('choppingboard.jpg');">
+	    <h1> Cheeses </h1>
+	    <form action="{{ url_for('index') }}" method='POST'>
             {{ form.order_with }}
             {{ form.submit }}
         </form>
         {% for cheese in Cheeses %}
 
             {{ cheese.task }}
-            <form action='{{ url_for('update', id=cheese.id) }}'>
+            <form action='{{ url_for('updatecheese', id=cheese.id) }}'>
             <input type=submit value="Change">
             </form>
             <form action='{{ url_for('delete', id=cheese.id) }}'>
