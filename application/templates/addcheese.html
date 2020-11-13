@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+<form method='POST' action=''>
+        {{ form.hidden_tag() }}
+	<h1> Enter a Cheese: </h1> {{ form.cheese_name }} <br>
+        <h1> Enter cheese texture: </h1>  {{ form.cheese_texture }} <br>
+	<h1> Enter cheese origin: </h1>{{ form.cheese_origin }} <br>
+	<h1> Enter cheese aroma: </h1>{{ form.cheese_aroma }} <br>
+	<h1> Enter cheese taste: </h1>{{ form.cheese_taste }} <br>
+        {% if form.cheese_name.errors %}
+                {% for error in form.cheese_name.errors %}
+                {{ error }} <br>
+                {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+</form>
+{% endblock body_content %}
+~                                    

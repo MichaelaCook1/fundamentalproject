@@ -1,8 +1,8 @@
 from application import db #imports database
 
 class Cheeses(db.Model): #declares Cheese table as a class
-    cheese_id = db.Column(db.Integer,primary_key=True, nullable=False)
-    cheese_name = db.Column(db.String(50), nullable=False)
+    cheese_id = db.Column(db.Integer,primary_key=True)
+    cheese_name = db.Column(db.String(50))
     cheese_texture = db.Column(db.String(50))
     cheese_origin = db.Column(db.String(50))
     cheese_aroma = db.Column(db.String(50))
@@ -13,8 +13,8 @@ class Cheeses(db.Model): #declares Cheese table as a class
 #################################################################################################################
 
 class Wines(db.Model): #declares Wine table as a class
-    wine_id = db.Column(db.Integer,primary_key=True, nullable=False)
-    wine_name = db.Column(db.String(50), nullable=False)
+    wine_id = db.Column(db.Integer,primary_key=True)
+    wine_name = db.Column(db.String(50))
     wine_body = db.Column(db.String(50))
     wine_colour = db.Column(db.String(50))
     wine_origin = db.Column(db.String(50))
@@ -25,7 +25,7 @@ class Wines(db.Model): #declares Wine table as a class
 #################################################################################################################
 
 class Pairing(db.Model): # declares Wine&Cheese Pariiing table as class
-    pair_id = db.Column(db.Integer,primary_key=True, nullable=False)
-    cheese_id = db.Column(db.Integer, db.ForeignKey('cheeses.cheese_id'), nullable=False)
-    wine_id = db.Column(db.Integer, db.ForeignKey('wines.wine_id'),nullable=False)
+    pair_id = db.Column(db.Integer,primary_key=True)
+    cheese_id = db.Column(db.Integer, db.ForeignKey('cheeses.cheese_id'))
+    wine_id = db.Column(db.Integer, db.ForeignKey('wines.wine_id'))
 

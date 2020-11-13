@@ -1,24 +1,44 @@
-{% extends 'layout.html %}
-{% block body_content %}
+{% extends 'layout.html' %} 
+{% block body_content %}	
+	<div> 
+		<img src="choppingboard.jpg">
+		<h4> Cheeses </h4>
+        {% for cheese in cheeses %}
+		{{ cheese.cheese_name }}
+		{{ cheese.cheese_texture }}
+		{{ cheese.cheese_origin }}
+		{{ cheese.cheese_aroma }}
+		{{ cheese.cheese_taste }}
+		<form action='{{ url_for('updatecheese', cheese_id=cheese.cheese_id) }}'>
+			<button>Update</button>
+		</form>
+		<form action='{{ url_for('deletecheese', cheese_id=cheese.cheese_id) }}'>
+			<button>Delete</button>
+		</form>
+		<br>
+	{% endfor %}
+	
+	<h4> Wines </h4>
+	{% for wine in wines %}
+		{{wine.wine_name }}
+		<form action=' {{url_for('updatewine', wine_id=wine.wine_id) }}'>
+			<button>Update</button>
+		</form>
+		<form action=' {{url_for('deletewine', wine_id=wine.wine_id) }}'>
+			<button>Delete</button>
+		<br>
+	{% endfor %}
 
-<div style="background-image: url('choppingboard.jpg');">
-	    <h1> Cheeses </h1>
-	    <form action="{{ url_for('index') }}" method='POST'>
-            {{ form.order_with }}
-            {{ form.submit }}
-        </form>
-        {% for cheese in Cheeses %}
-
-            {{ cheese.task }}
-            <form action='{{ url_for('updatecheese', id=cheese.id) }}'>
-            <input type=submit value="Change">
-            </form>
-            <form action='{{ url_for('delete', id=cheese.id) }}'>
-            <input type=submit value="Delete">
-            </form>
-            <br>
-
-        {% endfor %}
-    <div>
-{% endblock body_content %}
+	<h4> Pairs </h4>
+	{% for pair in pairs %}
+		{{pair.pair_id }}
+		<form action=' {{url_for('updatepair', pair_id=pair.pair_id) }}'>
+			<button>Update</button>
+		</form>
+		<form action=' {{url_for('deletepair', pair_id=pair.pair_id) }}'>
+			<button>Delete</button>
+		<br>
+	{% endfor %}
+	<div>
+{% endblock %}
 

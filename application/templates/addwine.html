@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+<form method='POST' action=''>
+        {{ form.hidden_tag() }}
+	<h1> Enter Wine name: </h1> {{ form.wine_name }} <br>
+	<h1> Enter wine body: </h1>{{ form.wine_body }} <br>
+        <h1> Enter wine colour: </h1> {{ form.wine_colour }} <br>
+	<h1> Enter wine origin: </h1>{{ form.wine_origin }} <br>
+	<h1> Enter wine aroma: </h1>{{ form.wine_aroma }} <br>
+	<h1> Enter wine taste: </h1>{{ form.wine_taste }} <br>
+        {% if form.wine_name.errors %}
+                {% for error in form.wine_name.errors %}
+                {{ error }} <br>
+                {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+</form>
+{% endblock body_content %}
+~

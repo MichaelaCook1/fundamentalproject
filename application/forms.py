@@ -5,74 +5,62 @@ from wtforms.validators import DataRequired, ValidationError
 from application.models import Cheeses
 
 class CheeseForm(FlaskForm):
-    task=StringField('Task',
+    cheese_name=StringField('cheese_name',
             validators=[
                 DataRequired(),
                 ]
             )
+    cheese_texture=StringField('cheese_texture')
+    cheese_origin=StringField('cheese_origin')
+    cheese_aroma=StringField('cheese_aroma')
+    cheese_taste=StringField('cheese_taste')
+
     submit = SubmitField('Submit')
 
-    def validate_task(self,task):
+
+    def validate_cheese(self,cheese_name):
         cheeses = Cheeses.query.all()
         for cheese in cheeses:
-            if cheese.task == task.data:
+            if cheese.cheese_name == cheese_name.data:
                 raise ValidationError("You've already added this Cheese")
 
-class OrderCheese(FlaskForm):
-    order_with = SelectField('Order With',
-            choices=[
-                ("id","Recent"),
-                ("old","Old")
-                ]
-            )
-    submit = SubmitField('Order')
 
 ####################################################################################################################################################################
 
 from application.models import Wines
 class WineForm(FlaskForm):
-    task=StringField('Task',
+    wine_name=StringField('wine_name',
             validators=[
                 DataRequired(),
                 ]
             )
+    wine_body=StringField('wine_body')
+    wine_colour=StringField('wine_colour')
+    wine_origin=StringField('wine_origin')
+    wine_aroma=StringField('wine_aroma')
+    wine_taste=StringField('wine_taste')
+
     submit = SubmitField('Submit')
     
-    def validate_task(self,task):
+    def validate_wine_name(self,wine_name):
         wines = Wines.query.all()
         for wine in wines:
-            if wine.task == task.data:
+            if wine.wine_name == wine_name.data:
                 raise ValidationError("You've already added this Wine")
-class OrderWine(FlaskForm):
-    order_with = SelectField('Order With',
-            choices=[
-                ("id","Recent"),
-                ("old","Old")
-                ]
-            )
-    submit = SubmitField('Order')
 
 ####################################################################################################################################################################
 
 from application.models import Pairing
 class PairForm(FlaskForm):
-    task=StringField('Task',
-            validators=[
-                DataRequired(),
-                ]
-            )
+    cheese_id=SelectField('Choose Cheese', choices=[])
+    
+    wine_id=SelectField('Choose Wine', choices=[])
+
     submit = SubmitField('Submit')
     
     def validate_task(self,task):
         pairs = Pairing.query.all()
         for pair in pairs:
-            if pair.task == task.data:
+            if pair.cheese_id == cheese_id.data and pair.wine_id ==wine_id.data:
                 raise ValidationError("You've already added this Pairing")
-class OrderPairing(FlaskForm):
-    order_with = SelectField('Order With',
-            choices=[
-                ("id","Recent"),
-                ("old","Old")
-                ]
-            )
-    submit = SubmitField('Order')
+
