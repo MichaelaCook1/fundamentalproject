@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+
+<form method='POST' action=''>
+	{{ form.hidden_tag()}} <br>
+	{{ form.cheese_name.label }} {{ form.cheese_name }}<br>
+	{{ form.cheese_texture.label }}	{{ form.cheese_texture }} <br>
+	{{ form.cheese_origin.label }} {{ form.cheese_origin }} <br>
+	{{ form.cheese_aroma.label }} {{ form.cheese_aroma }} <br>
+	{{ form.cheese_taste.label }} {{ form.cheese_tase }} <br>
+        {% if form.cheese_name.errors %}
+                {% for error in form.cheese_name.errors %}
+                        {{ error }} <br>
+                {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+</form>
+{% endblock body_content %}

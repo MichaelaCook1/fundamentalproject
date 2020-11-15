@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+
+<form method='POST' action=''>
+        {{ form.hidden_tag()}}
+        {{ form.wine_name.label }} {{ form.wine_name }} <br>
+	{{ form.wine_body.label }} {{ form.wine_body }} <br>
+	{{ form.wine_colour.label }} {{ form.wine_colour }} <br>
+	{{ form.wine_origin.label }} {{ form.wine_origin }} <br>
+	{{ form.wine_aroma.label }} {{ form.wine_aroma }} <br>
+	{{ form.wine_taste.label }} {{ form.wine_taste }} <br>
+        {% if form.wine_name.errors %}
+                {% for error in form.wine_name.errors %}
+                        {{ error }} <br>
+                {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+</form>
+{% endblock body_content %}

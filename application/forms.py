@@ -2,12 +2,24 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError
 
+
 from application.models import Cheeses
+
+class CheeseCheck:
+    def __init__(self,message):
+        self.message = message
+        
+    def __call__(self, form, field):
+        cheese_total = Cheeses.query.all()
+        for cheese in cheese_total:
+            if cheese_name.cheese_name == field.data:
+                raise ValidationError(self.message)
 
 class CheeseForm(FlaskForm):
     cheese_name=StringField('cheese_name',
             validators=[
                 DataRequired(),
+                CheeseCheck(message=" You already have that cheese")
                 ]
             )
     cheese_texture=StringField('cheese_texture')
@@ -16,14 +28,6 @@ class CheeseForm(FlaskForm):
     cheese_taste=StringField('cheese_taste')
 
     submit = SubmitField('Submit')
-
-
-    def validate_cheese(self,cheese_name):
-        cheeses = Cheeses.query.all()
-        for cheese in cheeses:
-            if cheese.cheese_name == cheese_name.data:
-                raise ValidationError("You've already added this Cheese")
-
 
 ####################################################################################################################################################################
 

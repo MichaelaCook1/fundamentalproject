@@ -1,4 +1,4 @@
-from flask import render_template,redirect,url_for 
+from flask import render_template,redirect,url_for, request 
 from application import db, app
 from application.models import Cheeses, Wines,  Pairing
 from application.forms import CheeseForm, WineForm,  PairForm
@@ -78,12 +78,12 @@ def addpair():
 @app.route('/updatecheese/<int:cheese_id>', methods=['GET','POST'])
 def updatecheese(cheese_id):
     form = CheeseForm()
-    cheese = Cheeses.query.get(cheese_id)
+    cheese_update = Cheeses.query.get(cheese_id)
     if form.validate_on_submit():
-        cheese_update.cheese_name = form.cheese_name.data,
-        cheese_update.cheese_texture = form.cheese_texture.data,
-        cheese_update.cheese_origin = form.cheese_origin.data,
-        cheese_update.cheese_aroma = form.cheese_aroma.data,
+        cheese_update.cheese_name = form.cheese_name.data
+        cheese_update.cheese_texture = form.cheese_texture.data
+        cheese_update.cheese_origin = form.cheese_origin.data
+        cheese_update.cheese_aroma = form.cheese_aroma.data
         cheese_update.cheese_taste = form.cheese_taste.data
         db.session.commit()
         return redirect(url_for('index'))
@@ -100,13 +100,13 @@ def updatecheese(cheese_id):
 @app.route('/updatewine/<int:wine_id>', methods=['GET','POST'])
 def updatewine(wine_id):
     form = WineForm()
-    wine = Wines.query.get(wine_id)
+    wine_update = Wines.query.get(wine_id)
     if form.validate_on_submit():
-        wine_update.wine_name = form.wine_name.data,
-        wine_update.wine_body = form.wine_body.data,
-        wine_update.wine_colour = form.wine_colour.data,
-        wine_update.wine_origin = form.wine_origin.data,
-        wine_update.wine_aroma = form.wine_aroma.data,
+        wine_update.wine_name = form.wine_name.data
+        wine_update.wine_body = form.wine_body.data
+        wine_update.wine_colour = form.wine_colour.data
+        wine_update.wine_origin = form.wine_origin.data
+        wine_update.wine_aroma = form.wine_aroma.data
         wine_update.wine_taste = form.wine_taste.data
         db.session.commit()
         return redirect(url_for('index'))
@@ -117,7 +117,7 @@ def updatewine(wine_id):
         form.wine_origin.data = wine_update.wine_origin
         form.wine_aroma.data = wine_update.wine_aroma
         form.wine_taste.data = wine_update.wine_taste
-        return render_template('update.html', title='Update your Wines',form=form)
+        return render_template('updatewine.html', title='Update your Wines',form=form)
 
 ##################################################################################################################################################################
 
@@ -142,18 +142,18 @@ def deletecheese(cheese_id):
     currentcheese = Cheeses.query.get(cheese_id)
     db.session.delete(currentcheese)
     db.session.commit()
-    return(redirect(url_for('index')))
+    return(redirect(url_for('index',cheese_id=cheese_id)))
 
 @app.route('/deletewine/<int:wine_id>')
 def deletewine(wine_id):
     currentwine = Wines.query.get(wine_id)
     db.session.delete(currentwine)
     db.session.commit()
-    return(redirect(url_for('index')))
+    return(redirect(url_for('index', wine_id=wine_id)))
     
 @app.route('/deletepair/<int:pair_id>')
 def deletepair(pair_id):
     currentpair = Pairing.query.get(pair_id)
     db.session.delete(currentpair)
     db.session.commit()
-    return(redirect(url_for('index')))
+    return(redirect(url_for('index', pair_id=pair_id)))

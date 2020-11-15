@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+<form method='POST' action=''>
+        {{ form.hidden_tag()}}
+	{{ form.pair_id.label }} {{ form.pair_id }} <br>
+	{{ form.cheese_name.label }} {{ form.cheese_id }} <br>
+	{{ form.wine_name.label }} {{ form.wine_id }} <br>
+        {% if form.pair_id.errors %}
+                {% for error in form.pair_id.errors %}
+                        {{ error }} <br>
+                {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+</form>
+{% endblock body_content %}
