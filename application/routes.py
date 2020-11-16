@@ -93,7 +93,7 @@ def updatecheese(cheese_id):
         form.cheese_origin.data = cheese_update.cheese_origin
         form.cheese_aroma.data = cheese_update.cheese_aroma
         form.cheese_taste.data = cheese_update.cheese_taste
-        return render_template('update.html', title='Update your Cheeses',form=form)
+        return render_template('updatecheese.html', title='Update your Cheeses',form=form)
 
 ##################################################################################################################################################################
 

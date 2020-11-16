@@ -12,7 +12,7 @@ class CheeseCheck:
     def __call__(self, form, field):
         cheese_total = Cheeses.query.all()
         for cheese in cheese_total:
-            if cheese_name.cheese_name == field.data:
+            if Cheeses.cheese_name == field.data:
                 raise ValidationError(self.message)
 
 class CheeseForm(FlaskForm):
