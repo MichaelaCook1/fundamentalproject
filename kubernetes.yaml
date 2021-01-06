@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app.py
+spec:
+  selector:
+    app: app.py
+  ports: 
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app.py
+  labels: 
+    app: app.py
+spec:
+  selector:
+    matchLabels:
+      app: app.py
+  template:
+    metadata:
+      labels:
+        app: app.py
+    spec:
+      containers:
+      - name: app.py
+        image: michaelacook1/app:latest
+        ports:
+        - containerPort: 5000
