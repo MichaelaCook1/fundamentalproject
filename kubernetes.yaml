@@ -12,20 +12,12 @@ spec:
   type: LoadBalancer
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: Pod
 metadata:
   name: app.py
   labels: 
     app: app.py
 spec:
-  selector:
-    matchLabels:
-      app: app.py
-  template:
-    metadata:
-      labels:
-        app: app.py
-    spec:
       containers:
       - name: app.py
         image: michaelacook1/app:latest
