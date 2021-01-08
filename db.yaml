@@ -9,8 +9,8 @@ metadata:
       - name: mysql
         image: michaelacook1/db
       env:
-      - name: MYSQL_DB
-        value: "board_db"
+      - name: DB_URI
+        value: sqlite:///data
       - name: MYSQL_ROOT_PASSWORD
         valueFrom:
           secretKeyref:
